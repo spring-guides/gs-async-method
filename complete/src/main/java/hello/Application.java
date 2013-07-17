@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @Configuration
-@EnableAutoConfiguration
 @EnableAsync
+@EnableAutoConfiguration
 @ComponentScan
 public class Application implements CommandLineRunner {
 
@@ -32,7 +32,7 @@ public class Application implements CommandLineRunner {
 		
 		// Wait until they are all done
 		while (!(page1.isDone() && page2.isDone() && page3.isDone() && page4.isDone())) {
-			Thread.sleep(10);
+			Thread.sleep(10); //millisecond pause between each check
 		}
 		
 		// Print results, including elapsed time
