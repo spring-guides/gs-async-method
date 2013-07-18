@@ -62,7 +62,7 @@ In a project directory of your choosing, create the following subdirectory struc
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>gs-async-method-initial</artifactId>
+    <artifactId>gs-async-method</artifactId>
     <version>0.1.0</version>
 
     <parent>
