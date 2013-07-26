@@ -1,8 +1,5 @@
 <#assign project_id="gs-async-method">
 
-Getting Started: Creating Asynchronous Methods
-==============================================
-
 What you'll build
 -----------------
 

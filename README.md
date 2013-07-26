@@ -1,7 +1,4 @@
 
-Getting Started: Creating Asynchronous Methods
-==============================================
-
 What you'll build
 -----------------
 
