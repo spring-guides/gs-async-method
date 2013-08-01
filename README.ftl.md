@@ -81,7 +81,7 @@ The [`@EnableAutoConfiguration`][] annotation switches on reasonable default beh
 
 <@build_an_executable_jar/>
 
-<@run_the_application/>
+<@run_the_application_with_maven/>
 
 Logging output is displayed. It shows each query to Facebook being kicked off. Then it monitors each `Future` so when they are all done, it will print out the results along with the total amount of elapsed time.
 
