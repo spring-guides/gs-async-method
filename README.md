@@ -71,16 +71,16 @@ In a project directory of your choosing, create the following subdirectory struc
 
     <dependencies>
         <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.springframework</groupId>
-        	<artifactId>spring-web</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
         </dependency>
         <dependency>
-        	<groupId>com.fasterxml.jackson.core</groupId>
-        	<artifactId>jackson-databind</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
     </dependencies>
 
@@ -128,27 +128,30 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Page {
-	
-	private String name;
-	private String website;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getWebsite() {
-		return website;
-	}
-	public void setWebsite(String website) {
-		this.website = website;
-	}
 
-	@Override
-	public String toString() {
-		return "Page [name=" + name + ", website=" + website + "]";
-	}
+    private String name;
+    private String website;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    @Override
+    public String toString() {
+        return "Page [name=" + name + ", website=" + website + "]";
+    }
 
 }
 ```
@@ -175,16 +178,16 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class FacebookLookupService {
 
-	RestTemplate restTemplate = new RestTemplate();
+    RestTemplate restTemplate = new RestTemplate();
 
-	@Async
-	public Future<Page> findPage(String page) throws InterruptedException {
-		System.out.println("Looking up " + page);
-		Page results = restTemplate.getForObject("http://graph.facebook.com/" + page, Page.class);
-		Thread.sleep(1000L);
-		return new AsyncResult<Page>(results);
-	}
-	
+    @Async
+    public Future<Page> findPage(String page) throws InterruptedException {
+        System.out.println("Looking up " + page);
+        Page results = restTemplate.getForObject("http://graph.facebook.com/" + page, Page.class);
+        Thread.sleep(1000L);
+        return new AsyncResult<Page>(results);
+    }
+
 }
 ```
     
@@ -225,36 +228,36 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ComponentScan
 public class Application implements CommandLineRunner {
 
-	@Autowired
-	FacebookLookupService facebookLookupService;
+    @Autowired
+    FacebookLookupService facebookLookupService;
 
-	@Override
-	public void run(String... args) throws Exception {
-		// Start the clock
-		long start = System.currentTimeMillis();
-		
-		// Kick of multiple, asynchronous lookups
-		Future<Page> page1 = facebookLookupService.findPage("GoPivotal");
-		Future<Page> page2 = facebookLookupService.findPage("SpringSource");
-		Future<Page> page3 = facebookLookupService.findPage("CloudFoundry");
-		Future<Page> page4 = facebookLookupService.findPage("SpringFramework");
-		
-		// Wait until they are all done
-		while (!(page1.isDone() && page2.isDone() && page3.isDone() && page4.isDone())) {
-			Thread.sleep(10); //millisecond pause between each check
-		}
-		
-		// Print results, including elapsed time
-		System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
-		System.out.println(page1.get());
-		System.out.println(page2.get());
-		System.out.println(page3.get());
-		System.out.println(page4.get());
-	}
+    @Override
+    public void run(String... args) throws Exception {
+        // Start the clock
+        long start = System.currentTimeMillis();
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+        // Kick of multiple, asynchronous lookups
+        Future<Page> page1 = facebookLookupService.findPage("GoPivotal");
+        Future<Page> page2 = facebookLookupService.findPage("SpringSource");
+        Future<Page> page3 = facebookLookupService.findPage("CloudFoundry");
+        Future<Page> page4 = facebookLookupService.findPage("SpringFramework");
+
+        // Wait until they are all done
+        while (!(page1.isDone() && page2.isDone() && page3.isDone() && page4.isDone())) {
+            Thread.sleep(10); //millisecond pause between each check
+        }
+
+        // Print results, including elapsed time
+        System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
+        System.out.println(page1.get());
+        System.out.println(page2.get());
+        System.out.println(page3.get());
+        System.out.println(page4.get());
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
 }
 ```
