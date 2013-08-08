@@ -10,11 +10,11 @@ There's more to scaling applications than asynchronous methods. You can continue
 * [Messaging with Redis][gs-messaging-redis]
 * [Messaging with JMS][gs-messaging-jms]
 
-[gs-scheduling-tasks]: /guides/gs/scheduling-tasks/content
-[gs-caching-gemfire]: /guides/gs/caching-gemfire/content
-[gs-messaging-rabbitmq]: /guides/gs/messaging-rabbitmq/content
-[gs-messaging-redis]: /guides/gs/messaging-redis/content
-[gs-messaging-jms]: /guides/gs/messaging-jms/content
+[gs-scheduling-tasks]: /guides/gs/scheduling-tasks/
+[gs-caching-gemfire]: /guides/gs/caching-gemfire/
+[gs-messaging-rabbitmq]: /guides/gs/messaging-rabbitmq/
+[gs-messaging-redis]: /guides/gs/messaging-redis/
+[gs-messaging-jms]: /guides/gs/messaging-jms/
 
 ### Tutorials
 
