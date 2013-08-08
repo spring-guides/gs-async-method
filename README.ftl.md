@@ -1,9 +1,10 @@
 <#assign project_id="gs-async-method">
+This guide walks you through the steps to create an asynchronous query to Facebook.
 
 What you'll build
 -----------------
 
-This guide walks you through the steps to create an asynchronous query to Facebook. This will help you scale certain services to run in the background using Java's [`Future`][] interface.
+This will help you scale services to run in the background using Java's [`Future`][] interface.
 
 What you'll need
 ----------------

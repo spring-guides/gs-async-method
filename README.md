@@ -1,8 +1,9 @@
+This guide walks you through the steps to create an asynchronous query to Facebook.
 
 What you'll build
 -----------------
 
-This guide walks you through the steps to create an asynchronous query to Facebook. This will help you scale certain services to run in the background using Java's [`Future`][] interface.
+This will help you scale services to run in the background using Java's [`Future`][] interface.
 
 What you'll need
 ----------------
@@ -38,7 +39,7 @@ To **skip the basics**, do the following:
 Set up the project
 ------------------
 
-First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven/) or [Building Java Projects with Gradle](/guides/gs/gradle/).
+First you set up a basic build script. You can use any build system you like when building apps with Spring, but the code you need to work with [Maven](https://maven.apache.org) and [Gradle](http://gradle.org) is included here. If you're not familiar with either, refer to [Building Java Projects with Maven](/guides/gs/maven) or [Building Java Projects with Gradle](/guides/gs/gradle/).
 
 ### Create the directory structure
 
