@@ -1,8 +1,8 @@
-## Related Resources
+## Related resources
 
-There's more to scaling applications than asynchronous methods. You can continue your exploration of Spring's support for caching and message-driven solutions with the following resources.
+There's more to scaling applications than asynchronous methods. You can explore Spring's support for caching and message-driven solutions with the following resources.
 
-### Getting Started Guides
+### Getting Started guides
 
 * [Scheduling Tasks][gs-scheduling-tasks]
 * [Caching Data with GemFire][gs-caching-gemfire]
@@ -22,7 +22,7 @@ There's more to scaling applications than asynchronous methods. You can continue
 
 [tut-tbd]: /guides/tutorials/tbd
 
-### Concepts and Technologies
+### Concepts and technologies
 
 * [REST][u-rest]
 * [JSON][u-json]

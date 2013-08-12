@@ -1,10 +1,10 @@
 <#assign project_id="gs-async-method">
-This guide walks you through the steps to create an asynchronous query to Facebook.
+This guide walks you through the steps to create asynchronous queries to Facebook.
 
 What you'll build
 -----------------
 
-This will help you scale services to run in the background using Java's [`Future`][] interface.
+You'll build a lookup service that queries Facebook pages and retrieve data through Facebook's Graph API. You can scale services to run in the background using Java's [`Future`][] interface.
 
 What you'll need
 ----------------
@@ -13,7 +13,7 @@ What you'll need
  - <@prereq_editor_jdk_buildtools/>
 
 
-## <@how_to_complete_this_guide jump_ahead="Create a representation of a Page"/>
+## <@how_to_complete_this_guide jump_ahead="Create a representation of a page"/>
 
 
 <a name="scratch"></a>
@@ -32,16 +32,16 @@ Set up the project
 
 
 <a name="initial"></a>
-Create a representation of a Page
+Create a representation of a page
 ----------------------------------
 
-Now that you've set up the project and build system, you can create a Facebook lookup service. Before you can do that, you need to define a representation for the data you'll retrieve through Facebook's Graph API.
+Before you can create a Facebook lookup service, you need to define a representation for the data you'll retrieve through Facebook's Graph API.
 
-To model the page representation, you create a resource representation class. Provide a plain old java object with fields, constructors, and accessors for the `id` and `content` data:
+To model the page representation, you create a resource representation class. Provide a plain old Java object with fields, constructors, and accessors for the `id` and `content` data:
 
     <@snippet path="src/main/java/hello/Page.java" prefix="complete"/>
 
-Spring uses the [Jackson JSON][jackson] library to convert Facebook's JSON response into a `Page` object. The `@JsonIgnoreProperties` annotation signals Spring to ignore any attributes not listed in the class. This makes is super easy to make REST calls and produce domain objects.
+Spring uses the [Jackson JSON][jackson] library to convert Facebook's JSON response into a `Page` object. The `@JsonIgnoreProperties` annotation signals Spring to ignore any attributes not listed in the class. This makes it easy to make REST calls and produce domain objects.
 
 
 Create a Facebook lookup service
@@ -51,20 +51,20 @@ Next you need to create a service that queries Facebook to find pages.
 
     <@snippet path="src/main/java/hello/FacebookLookupService.java" prefix="complete"/>
     
-The `FacebookLookupService` uses Spring's `RestTemplate` to invoke a remote REST point (graph.facebook.com), and then convert the answer into a `Page` object.
+The `FacebookLookupService` class uses Spring's `RestTemplate` to invoke a remote REST point (graph.facebook.com), and then convert the answer into a `Page` object.
 
 The class is marked with the `@Service` annotation, making it a candidate for Spring's component scanning to detect it and add it to the [application context][u-application-context].
 
-The `findPage` method is flagged with Spring's `@Async` annotation, indicating it will be run on a separate thread. It's return type is [`Future<Page>`][`Future`] instead of `Page`, a requirement for any asynchronous service. This code uses the concrete implementation of `AsyncResult` to wrap the results of the Facebook query.
+The `findPage` method is flagged with Spring's `@Async` annotation, indicating it will run on a separate thread. The method's return type is [`Future<Page>`][`Future`] instead of `Page`, a requirement for any asynchronous service. This code uses the concrete implementation of `AsyncResult` to wrap the results of the Facebook query.
 
-> **Note:** Creating a local instance of this class will NOT allow this method to run asynchronously. It must be created inside a `@Configuration` class or picked up by `@ComponentScan`.
+> **Note:** Creating a local instance of the `FacebookLookupService` class does NOT allow the `findPage` method to run asynchronously. It must be created inside a `@Configuration` class or picked up by `@ComponentScan`.
 
 The timing for Facebook's Graph API can vary widely. To demonstrate the benefits later in this guide, an extra delay of one second has been added to this service.
 
 Make the application executable
 -------------------------------
 
-To run a sample, you can create an executable jar. Spring's `@Async` annotation works with web apps, but you don't need all the extra steps of setting up a web container to see it's benefits.
+To run a sample, you can create an executable jar. Spring's `@Async` annotation works with web apps, but you don't need all the extra steps of setting up a web container to see its benefits.
 
 ### Create an Application class
 
@@ -84,7 +84,7 @@ The [`@EnableAutoConfiguration`][] annotation switches on reasonable default beh
 
 <@run_the_application_with_maven/>
 
-Logging output is displayed. It shows each query to Facebook being kicked off. Then it monitors each `Future` so when they are all done, it will print out the results along with the total amount of elapsed time.
+Logging output is displayed, showing each query to Facebook. Each `Future` is monitored, so when they are all done, the log will print out the results along with the total amount of elapsed time.
 
 ```
 Looking up GoPivotal
@@ -98,15 +98,15 @@ Page [name=Cloud Foundry, website=http://www.cloudfoundry.com]
 Page [name=Spring Framework, website=null]
 ```
 
-To compare how long this would take without the asynchronous feature, try commenting out the `@Async` annotation and run it again. The total elapsed time should increase noticeably since each query will take at least a second.
+To compare how long this takes without the asynchronous feature, try commenting out the `@Async` annotation and run the service again. The total elapsed time should increase noticeably because each query takes at least a second.
 
-Essentially, the longer the task takes and the more tasks are invoked simultaneously, the more benefit you will see with making things asynchronous. The trade off is having to handle the `Future` interface, and possible synchronizing on the output of multiple calls, especially if one is dependent on another.
+Essentially, the longer the task takes and the more tasks are invoked simultaneously, the more benefit you will see with making things asynchronous. The trade off is handling the `Future` interface, and possible synchronizing the output of multiple calls, especially if one is dependent on another.
 
 
 Summary
 -------
 
-Congratulations! You've just developed an asynchronous service and seen how it lets you scale multiple calls at once.
+Congratulations! You've just developed an asynchronous service that lets you scale multiple calls at once.
 
 
 [`Future`]: http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html
