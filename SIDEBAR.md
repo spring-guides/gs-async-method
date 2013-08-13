@@ -27,5 +27,5 @@ There's more to scaling applications than asynchronous methods. You can continue
 * [REST][u-rest]
 * [JSON][u-json]
 
-<@u_rest/>
-<@u_json/>
+[u-rest]: /understanding/REST
+[u-json]: /understanding/JSON
