@@ -2,7 +2,7 @@
 
 There's more to scaling applications than asynchronous methods. You can continue your exploration of Spring's support for caching and message-driven solutions with the following resources.
 
-### Getting Started Guides
+### Getting Started guides
 
 * [Scheduling Tasks][gs-scheduling-tasks]
 * [Caching Data with GemFire][gs-caching-gemfire]
