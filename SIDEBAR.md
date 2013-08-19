@@ -1,6 +1,6 @@
-## Related resources
+## Related Resources
 
-There's more to scaling applications than asynchronous methods. You can explore Spring's support for caching and message-driven solutions with the following resources.
+There's more to scaling applications than asynchronous methods. You can continue your exploration of scaling tactics provided by Spring with the following resources.
 
 ### Getting Started guides
 
@@ -22,7 +22,7 @@ There's more to scaling applications than asynchronous methods. You can explore 
 
 [tut-rest]: /guides/tutorials/rest
 
-### Concepts and technologies
+### Concepts and Technologies
 
 * [REST][u-rest]
 * [JSON][u-json]

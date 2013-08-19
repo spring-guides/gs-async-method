@@ -1,10 +1,10 @@
 <#assign project_id="gs-async-method">
-This guide walks you through the steps to create asynchronous queries to Facebook.
+This guide walks you through the steps to create asynchronous queries to Facebook. The focus is on the asynchronous part, a feature often used when scaling services.
 
 What you'll build
 -----------------
 
-You'll build a lookup service that queries Facebook pages and retrieve data through Facebook's Graph API. You can scale services to run in the background using Java's [`Future`][] interface.
+You'll build a lookup service that queries Facebook pages and retrieve data through Facebook's Graph API. One approach to scaling services is to run expensive jobs in the background and wait for the results using Java's [`Future`][] interface. Java's `Future` is essentially a container oused to hold the potential results. It gives you methods to let you poll if the results have arrived yet, and when they have, the ability to access the results.
 
 What you'll need
 ----------------
@@ -43,6 +43,8 @@ To model the page representation, you create a resource representation class. Pr
 
 Spring uses the [Jackson JSON][jackson] library to convert Facebook's JSON response into a `Page` object. The `@JsonIgnoreProperties` annotation signals Spring to ignore any attributes not listed in the class. This makes it easy to make REST calls and produce domain objects.
 
+In this guide, we are only grabbing the `id` and the `content` for demonstration purposes.
+
 
 Create a Facebook lookup service
 --------------------------------
@@ -79,12 +81,11 @@ The [`@EnableAsync`][] annotation switches on Spring's ability to run `@Async` m
 The [`@EnableAutoConfiguration`][] annotation switches on reasonable default behaviors based on the content of your classpath. For example, it looks for any class that implements the `CommandLineRunner` interface and invokes its `run()` method. In this case, it runs the demo code for this guide.
 
 <@build_an_executable_jar_subhead/>
-
 <@build_an_executable_jar_with_gradle/>
 
 <@run_the_application_with_gradle/>
 
-Logging output is displayed, showing each query to Facebook. Each `Future` is monitored, so when they are all done, the log will print out the results along with the total amount of elapsed time.
+Logging output is displayed, showing each query to Facebook. Each `Future` result is monitored until available, so when they are all done, the log will print out the results along with the total amount of elapsed time.
 
 ```
 Looking up GoPivotal
@@ -100,7 +101,7 @@ Page [name=Spring Framework, website=null]
 
 To compare how long this takes without the asynchronous feature, try commenting out the `@Async` annotation and run the service again. The total elapsed time should increase noticeably because each query takes at least a second.
 
-Essentially, the longer the task takes and the more tasks are invoked simultaneously, the more benefit you will see with making things asynchronous. The trade off is handling the `Future` interface, and possible synchronizing the output of multiple calls, especially if one is dependent on another.
+Essentially, the longer the task takes and the more tasks are invoked simultaneously, the more benefit you will see with making things asynchronous. The trade off is handling the `Future` interface. It adds a layer of indirection because you are no longer dealing directly with the results, but must instead poll for them. If multiple method calls were previously chained together in a synchronous fashion, converting to an asynchronous approach may require synchronizing results. But this extra work may be necessary if asynchronous method calls solves a critical scaling issue.
 
 
 Summary
