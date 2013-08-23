@@ -24,9 +24,8 @@ Set up the project
 
 <@create_directory_structure_hello/>
 
-### Create a Gradle build file
 
-    <@snippet path="build.gradle" prefix="initial"/>
+<@create_both_builds/>
 
 <@bootstrap_starter_pom_disclaimer/>
 
@@ -81,9 +80,9 @@ The [`@EnableAsync`][] annotation switches on Spring's ability to run `@Async` m
 The [`@EnableAutoConfiguration`][] annotation switches on reasonable default behaviors based on the content of your classpath. For example, it looks for any class that implements the `CommandLineRunner` interface and invokes its `run()` method. In this case, it runs the demo code for this guide.
 
 <@build_an_executable_jar_subhead/>
-<@build_an_executable_jar_with_gradle/>
+<@build_an_executable_jar_with_both/>
 
-<@run_the_application_with_gradle/>
+<@run_the_application_with_both/>
 
 Logging output is displayed, showing each query to Facebook. Each `Future` result is monitored until available, so when they are all done, the log will print out the results along with the total amount of elapsed time.
 
