@@ -82,7 +82,7 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter:0.5.0.BUILD-SNAPSHOT")
+    compile("org.springframework.boot:spring-boot-starter:0.5.0.M2")
     compile("org.springframework:spring-web:4.0.0.M2")
     compile("com.fasterxml.jackson.core:jackson-databind:2.2.2")
     testCompile("junit:junit:4.11")
@@ -272,7 +272,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.BUILD-SNAPSHOT")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M2")
     }
 }
 ```
@@ -349,6 +349,6 @@ Congratulations! You've just developed an asynchronous service that lets you sca
 [`@EnableAsync`]: http://static.springsource.org/spring/docs/4.0.x/spring-framework-reference/html/scheduling.html#scheduling-annotation-support-async
 [jackson]: http://wiki.fasterxml.com/JacksonHome
 [u-application-context]: /understanding/application-context
-[`SpringApplication`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.BUILD-SNAPSHOT/javadoc-api/org/springframework/bootstrap/SpringApplication.html
-[`@EnableAutoConfiguration`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.BUILD-SNAPSHOT/javadoc-api/org/springframework/bootstrap/context/annotation/SpringApplication.html
+[`SpringApplication`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.M2/javadoc-api/org/springframework/bootstrap/SpringApplication.html
+[`@EnableAutoConfiguration`]: http://static.springsource.org/spring-bootstrap/docs/0.5.0.M2/javadoc-api/org/springframework/bootstrap/context/annotation/SpringApplication.html
 [`@Component`]: http://static.springsource.org/spring/docs/current/javadoc-api/org/springframework/stereotype/Component.html
