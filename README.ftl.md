@@ -4,7 +4,7 @@ This guide walks you through the steps to create asynchronous queries to Faceboo
 What you'll build
 -----------------
 
-You'll build a lookup service that queries Facebook pages and retrieve data through Facebook's Graph API. One approach to scaling services is to run expensive jobs in the background and wait for the results using Java's [`Future`][] interface. Java's `Future` is essentially a container oused to hold the potential results. It gives you methods to let you poll if the results have arrived yet, and when they have, the ability to access the results.
+You'll build a lookup service that queries Facebook pages and retrieve data through Facebook's Graph API. One approach to scaling services is to run expensive jobs in the background and wait for the results using Java's [`Future`][] interface. Java's `Future` is essentially a container housed to hold the potential results. It gives you methods to let you poll if the results have arrived yet, and when they have, the ability to access the results.
 
 What you'll need
 ----------------
