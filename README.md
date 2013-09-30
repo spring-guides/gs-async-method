@@ -226,12 +226,11 @@ public class Application implements CommandLineRunner {
 
         // Kick of multiple, asynchronous lookups
         Future<Page> page1 = facebookLookupService.findPage("GoPivotal");
-        Future<Page> page2 = facebookLookupService.findPage("SpringSource");
-        Future<Page> page3 = facebookLookupService.findPage("CloudFoundry");
-        Future<Page> page4 = facebookLookupService.findPage("SpringFramework");
+        Future<Page> page2 = facebookLookupService.findPage("CloudFoundry");
+        Future<Page> page3 = facebookLookupService.findPage("SpringFramework");
 
         // Wait until they are all done
-        while (!(page1.isDone() && page2.isDone() && page3.isDone() && page4.isDone())) {
+        while (!(page1.isDone() && page2.isDone() && page3.isDone())) {
             Thread.sleep(10); //millisecond pause between each check
         }
 
@@ -240,7 +239,6 @@ public class Application implements CommandLineRunner {
         System.out.println(page1.get());
         System.out.println(page2.get());
         System.out.println(page3.get());
-        System.out.println(page4.get());
     }
 
     public static void main(String[] args) {
