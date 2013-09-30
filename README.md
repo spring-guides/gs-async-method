@@ -324,10 +324,8 @@ Logging output is displayed, showing each query to Facebook. Each `Future` resul
 Looking up GoPivotal
 Looking up CloudFoundry
 Looking up SpringFramework
-Looking up SpringSource
-Elapsed time: 1633
+Elapsed time: 1298
 Page [name=Pivotal, website=http://www.gopivotal.com]
-Page [name=SpringSource, website=http://www.springsource.com]
 Page [name=Cloud Foundry, website=http://www.cloudfoundry.com]
 Page [name=Spring Framework, website=null]
 ```
