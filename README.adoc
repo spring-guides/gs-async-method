@@ -20,7 +20,6 @@ You'll build a lookup service that queries Facebook pages and retrieve data thro
 include::https://raw.github.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
 
 
-:jump_ahead: Create a representation of a page
 include::https://raw.github.com/spring-guides/getting-started-macros/master/how_to_complete_this_guide.adoc[]
 
 
