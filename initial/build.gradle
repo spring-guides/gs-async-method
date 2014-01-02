@@ -20,9 +20,9 @@ repositories {
 }
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter:0.5.0.M6")
-    compile("org.springframework:spring-web:4.0.0.RC1")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.2.2")
+    compile("org.springframework.boot:spring-boot-starter:0.5.0.M7")
+    compile("org.springframework:spring-web:4.0.0.RELEASE")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.3.0")
     testCompile("junit:junit:4.11")
 }
 
