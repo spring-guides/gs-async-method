@@ -113,7 +113,7 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 Logging output is displayed, showing each query to Facebook. Each `Future` result is monitored until available, so when they are all done, the log will print out the results along with the total amount of elapsed time.
 
 ....
-Looking up GoPivotal
+Looking up PivotalSoftware
 Looking up CloudFoundry
 Looking up SpringFramework
 Elapsed time: 1298

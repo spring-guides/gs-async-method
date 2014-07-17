@@ -25,7 +25,7 @@ public class Application implements CommandLineRunner {
         long start = System.currentTimeMillis();
 
         // Kick of multiple, asynchronous lookups
-        Future<Page> page1 = facebookLookupService.findPage("GoPivotal");
+        Future<Page> page1 = facebookLookupService.findPage("PivotalSoftware");
         Future<Page> page2 = facebookLookupService.findPage("CloudFoundry");
         Future<Page> page3 = facebookLookupService.findPage("SpringFramework");
 
