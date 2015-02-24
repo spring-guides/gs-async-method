@@ -4,12 +4,10 @@ projects: [spring-framework]
 ---
 :spring_version: current
 :spring_boot_version: 1.2.1.RELEASE
-:Component: http://docs.spring.io/spring/docs/{spring_version}/javadoc-api/org/springframework/stereotype/Component.html
 :jackson: http://wiki.fasterxml.com/JacksonHome
 :SpringApplication: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
 :EnableAsync: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support
 :Future: http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html
-:EnableAutoConfiguration: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/autoconfigure/EnableAutoConfiguration.html
 :toc:
 :icons: font
 :source-highlighter: prettify
@@ -85,13 +83,16 @@ To run a sample, you can create an executable jar. Spring's `@Async` annotation 
 include::complete/src/main/java/hello/Application.java[]
 ----
 
-The `main()` method defers to the {SpringApplication}[`SpringApplication`] helper class, providing `Application.class` as an argument to its `run()` method. This tells Spring to read the annotation metadata from `Application` and to manage it as a component in the link:/understanding/application-context[Spring application context].
+`@SpringBootApplication` is a convenience annotation that adds all of the following:
+    
+- `@Configuration` tags the class as a source of bean definitions for the application context.
+- `@EnableAutoConfiguration` tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings.
+- Normally you would add `@EnableWebMvc` for a Spring MVC app, but Spring Boot adds it automatically when it sees **spring-webmvc** on the classpath. This flags the application as a web application and activates key behaviors such as setting up a `DispatcherServlet`.
+- `@ComponentScan` tells Spring to look for other components, configurations, and services in the the `hello` package, allowing it to find the `HelloController`.
 
-The `@ComponentScan` annotation tells Spring to search recursively through the `hello` package and its children for classes marked directly or indirectly with Spring's {Component}[`@Component`] annotation. This directive ensures that Spring finds and registers the `FacebookLookupService`, because it is marked with `@Service`, which in turn is a kind of `@Component` annotation.
+The `main()` method uses Spring Boot's `SpringApplication.run()` method to launch an application. Did you notice that there wasn't a single line of XML? No **web.xml** file either. This web application is 100% pure Java and you didn't have to deal with configuring any plumbing or infrastructure.
 
 The {EnableAsync}[`@EnableAsync`] annotation switches on Spring's ability to run `@Async` methods in a background thread pool.
-
-The {EnableAutoConfiguration}[`@EnableAutoConfiguration`] annotation switches on reasonable default behaviors based on the content of your classpath. For example, it looks for any class that implements the `CommandLineRunner` interface and invokes its `run()` method. In this case, it runs the demo code for this guide.
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_subhead.adoc[]
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
@@ -101,10 +102,10 @@ Logging output is displayed, showing each query to Facebook. Each `Future` resul
 
 ....
 Looking up PivotalSoftware
-Looking up CloudFoundry
 Looking up SpringFramework
-Elapsed time: 1298
-Page [name=Pivotal, website=http://www.gopivotal.com]
+Looking up CloudFoundry
+Elapsed time: 1344
+Page [name=Pivotal, website=http://www.pivotal.io]
 Page [name=Cloud Foundry, website=http://www.cloudfoundry.com]
 Page [name=Spring Framework, website=null]
 ....

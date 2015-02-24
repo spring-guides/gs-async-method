@@ -2,18 +2,14 @@ package hello;
 
 import java.util.concurrent.Future;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-@Configuration
+@SpringBootApplication
 @EnableAsync
-@EnableAutoConfiguration
-@ComponentScan
 public class Application implements CommandLineRunner {
 
     @Autowired
@@ -31,7 +27,7 @@ public class Application implements CommandLineRunner {
 
         // Wait until they are all done
         while (!(page1.isDone() && page2.isDone() && page3.isDone())) {
-            Thread.sleep(10); //millisecond pause between each check
+            Thread.sleep(10); //10-millisecond pause between each check
         }
 
         // Print results, including elapsed time
