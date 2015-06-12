@@ -20,6 +20,7 @@ You'll build a lookup service that queries Facebook pages and retrieve data thro
 
 == What you'll need
 
+:java_version: 1.8
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/prereq_editor_jdk_buildtools.adoc[]
 
 
