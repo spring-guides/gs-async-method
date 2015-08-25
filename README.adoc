@@ -121,3 +121,6 @@ Essentially, the longer the task takes and the more tasks are invoked simultaneo
 Congratulations! You've just developed an asynchronous service that lets you scale multiple calls at once.
 
 
+
+include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
+
