@@ -12,11 +12,11 @@ projects: [spring-framework]
 :icons: font
 :source-highlighter: prettify
 :project_id: gs-async-method
-This guide walks you through the steps to create asynchronous queries to Facebook. The focus is on the asynchronous part, a feature often used when scaling services.
+This guide walks you through the steps to create asynchronous queries to GitHub. The focus is on the asynchronous part, a feature often used when scaling services.
 
 == What you'll build
 
-You'll build a lookup service that queries Facebook pages and retrieve data through Facebook's Graph API. One approach to scaling services is to run expensive jobs in the background and wait for the results using Java's {Future}[`Future`] interface. Java's `Future` is essentially a container housed to hold the potential results. It gives you methods to let you poll if the results have arrived yet, and when they have, the ability to access the results.
+You'll build a lookup service that queries GitHub user information and retrieves data through GitHub's API. One approach to scaling services is to run expensive jobs in the background and wait for the results using Java's {Future}[`Future`] interface. Java's `Future` is essentially a container housed to hold the potential results. It gives you methods to let you poll if the results have arrived yet, and when they have, the ability to access the results.
 
 == What you'll need
 
@@ -36,42 +36,43 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 
 
 [[initial]]
-== Create a representation of a page
+== Create a representation of a GitHub User
 
-Before you can create a Facebook lookup service, you need to define a representation for the data you'll retrieve through Facebook's Graph API.
+Before you can create a GitHub lookup service, you need to define a representation for the data you'll retrieve through GitHub's API.
 
-To model the page representation, you create a resource representation class. Provide a plain old Java object with fields, constructors, and accessors for the `id` and `content` data:
+To model the user representation, you create a resource representation class. Provide a plain old Java object with fields, constructors, and accessors:
 
-`src/main/java/hello/Page.java`
+`src/main/java/hello/User.java`
 [source,java]
 ----
-include::complete/src/main/java/hello/Page.java[]
+include::complete/src/main/java/hello/User.java[]
 ----
 
-Spring uses the {jackson}[Jackson JSON] library to convert Facebook's JSON response into a `Page` object. The `@JsonIgnoreProperties` annotation signals Spring to ignore any attributes not listed in the class. This makes it easy to make REST calls and produce domain objects.
+Spring uses the {jackson}[Jackson JSON] library to convert GitHub's JSON response into a `User` object. The `@JsonIgnoreProperties` annotation signals Spring to ignore any attributes not listed in the class. This makes it easy to make REST calls and produce domain objects.
 
-In this guide, we are only grabbing the `id` and the `content` for demonstration purposes.
+In this guide, we are only grabbing the `name` and the `blog` URL for demonstration purposes.
 
 
-== Create a Facebook lookup service
+== Create a GitHub lookup service
 
-Next you need to create a service that queries Facebook to find pages.
+Next you need to create a service that queries GitHub to find user information.
 
-`src/main/java/hello/FacebookLookupService.java`
+`src/main/java/hello/GitHubLookupService.java`
 [source,java]
 ----
-include::complete/src/main/java/hello/FacebookLookupService.java[]
+include::complete/src/main/java/hello/GitHubLookupService.java[]
 ----
     
-The `FacebookLookupService` class uses Spring's `RestTemplate` to invoke a remote REST point (graph.facebook.com), and then convert the answer into a `Page` object.
+The `GitHubLookupService` class uses Spring's `RestTemplate` to invoke a remote REST point
+(api.github.com/users/), and then convert the answer into a `User` object.
 
 The class is marked with the `@Service` annotation, making it a candidate for Spring's component scanning to detect it and add it to the link:/understanding/application-context[application context].
 
-The `findPage` method is flagged with Spring's `@Async` annotation, indicating it will run on a separate thread. The method's return type is {Future}[`Future<Page>`] instead of `Page`, a requirement for any asynchronous service. This code uses the concrete implementation of `AsyncResult` to wrap the results of the Facebook query.
+The `findUser` method is flagged with Spring's `@Async` annotation, indicating it will run on a separate thread. The method's return type is {Future}[`Future<User>`] instead of `User`, a requirement for any asynchronous service. This code uses the concrete implementation of `AsyncResult` to wrap the results of the GitHub query.
 
-NOTE: Creating a local instance of the `FacebookLookupService` class does NOT allow the `findPage` method to run asynchronously. It must be created inside a `@Configuration` class or picked up by `@ComponentScan`.
+NOTE: Creating a local instance of the `GitHubLookupService` class does NOT allow the `findUser` method to run asynchronously. It must be created inside a `@Configuration` class or picked up by `@ComponentScan`.
 
-The timing for Facebook's Graph API can vary widely. To demonstrate the benefits later in this guide, an extra delay of one second has been added to this service.
+The timing for GitHub's API can vary. To demonstrate the benefits later in this guide, an extra delay of one second has been added to this service.
 
 == Make the application executable
 
@@ -89,7 +90,7 @@ include::complete/src/main/java/hello/Application.java[]
 - `@Configuration` tags the class as a source of bean definitions for the application context.
 - `@EnableAutoConfiguration` tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings.
 - Normally you would add `@EnableWebMvc` for a Spring MVC app, but Spring Boot adds it automatically when it sees **spring-webmvc** on the classpath. This flags the application as a web application and activates key behaviors such as setting up a `DispatcherServlet`.
-- `@ComponentScan` tells Spring to look for other components, configurations, and services in the the `hello` package, allowing it to find the `HelloController`.
+- `@ComponentScan` tells Spring to look for other components, configurations, and services in the the `hello` package.
 
 The `main()` method uses Spring Boot's `SpringApplication.run()` method to launch an application. Did you notice that there wasn't a single line of XML? No **web.xml** file either. This web application is 100% pure Java and you didn't have to deal with configuring any plumbing or infrastructure.
 
@@ -99,16 +100,16 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/build_an_executable_jar_with_both.adoc[]
 
 
-Logging output is displayed, showing each query to Facebook. Each `Future` result is monitored until available, so when they are all done, the log will print out the results along with the total amount of elapsed time.
+Logging output is displayed, showing each query to GitHub. Each `Future` result is monitored until available, so when they are all done, the log will print out the results along with the total amount of elapsed time.
 
 ....
 Looking up PivotalSoftware
-Looking up SpringFramework
+Looking up Spring-Projects
 Looking up CloudFoundry
-Elapsed time: 1344
-Page [name=Pivotal, website=http://www.pivotal.io]
-Page [name=Cloud Foundry, website=http://www.cloudfoundry.com]
-Page [name=Spring Framework, website=null]
+Elapsed time: 1855
+User [name=Pivotal Software, Inc., blog=http://pivotal.io]
+User [name=Cloud Foundry, blog=https://www.cloudfoundry.org/]
+User [name=Spring, blog=http://spring.io/projects]
 ....
 
 To compare how long this takes without the asynchronous feature, try commenting out the `@Async` annotation and run the service again. The total elapsed time should increase noticeably because each query takes at least a second.

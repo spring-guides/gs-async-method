@@ -3,10 +3,10 @@ package hello;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class Page {
+public class User {
 
     private String name;
-    private String website;
+    private String blog;
 
     public String getName() {
         return name;
@@ -16,17 +16,17 @@ public class Page {
         this.name = name;
     }
 
-    public String getWebsite() {
-        return website;
+    public String getBlog() {
+        return blog;
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
+    public void setBlog(String blog) {
+        this.blog = blog;
     }
 
     @Override
     public String toString() {
-        return "Page [name=" + name + ", website=" + website + "]";
+        return "User [name=" + name + ", blog=" + blog + "]";
     }
 
 }

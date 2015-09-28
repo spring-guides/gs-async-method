@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class Application implements CommandLineRunner {
 
     @Autowired
-    FacebookLookupService facebookLookupService;
+    GitHubLookupService gitHubLookupService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -21,9 +21,9 @@ public class Application implements CommandLineRunner {
         long start = System.currentTimeMillis();
 
         // Kick of multiple, asynchronous lookups
-        Future<Page> page1 = facebookLookupService.findPage("PivotalSoftware");
-        Future<Page> page2 = facebookLookupService.findPage("CloudFoundry");
-        Future<Page> page3 = facebookLookupService.findPage("SpringFramework");
+        Future<User> page1 = gitHubLookupService.findUser("PivotalSoftware");
+        Future<User> page2 = gitHubLookupService.findUser("CloudFoundry");
+        Future<User> page3 = gitHubLookupService.findUser("Spring-Projects");
 
         // Wait until they are all done
         while (!(page1.isDone() && page2.isDone() && page3.isDone())) {
