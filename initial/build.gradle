@@ -28,6 +28,5 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter")
 	compile("org.springframework:spring-web")
 	compile("com.fasterxml.jackson.core:jackson-databind")
-    testCompile("junit:junit")
 }
 
