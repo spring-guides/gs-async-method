@@ -1,11 +1,11 @@
 package hello;
 
-import java.util.concurrent.Future;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.CompletableFuture;
 
 @Component
 public class AppRunner implements CommandLineRunner {
@@ -24,20 +24,19 @@ public class AppRunner implements CommandLineRunner {
         long start = System.currentTimeMillis();
 
         // Kick of multiple, asynchronous lookups
-        Future<User> page1 = gitHubLookupService.findUser("PivotalSoftware");
-        Future<User> page2 = gitHubLookupService.findUser("CloudFoundry");
-        Future<User> page3 = gitHubLookupService.findUser("Spring-Projects");
+        CompletableFuture<User> page1 = gitHubLookupService.findUser("PivotalSoftware");
+        CompletableFuture<User> page2 = gitHubLookupService.findUser("CloudFoundry");
+        CompletableFuture<User> page3 = gitHubLookupService.findUser("Spring-Projects");
 
         // Wait until they are all done
-        while (!(page1.isDone() && page2.isDone() && page3.isDone())) {
-            Thread.sleep(10); //10-millisecond pause between each check
-        }
+        CompletableFuture.allOf(page1,page2,page3).join();
 
         // Print results, including elapsed time
         logger.info("Elapsed time: " + (System.currentTimeMillis() - start));
         logger.info("--> " + page1.get());
         logger.info("--> " + page2.get());
         logger.info("--> " + page3.get());
+
     }
 
 }
