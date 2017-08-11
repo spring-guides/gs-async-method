@@ -65,7 +65,7 @@ Next you need to create a service that queries GitHub to find user information.
 ----
 include::complete/src/main/java/hello/GitHubLookupService.java[]
 ----
-    
+
 The `GitHubLookupService` class uses Spring's `RestTemplate` to invoke a remote REST point
 (api.github.com/users/), and then convert the answer into a `User` object. Spring Boot automatically provides a `RestTemplateBuilder` that customizes the defaults with any auto-configuration bits (i.e. `MessageConverter`).
 
@@ -126,7 +126,11 @@ Essentially, the longer the task takes and the more tasks are invoked simultaneo
 
 Congratulations! You've just developed an asynchronous service that lets you scale multiple calls at once.
 
+== See Also
 
+The following guides may also be helpful:
+
+* https://spring.io/guides/gs/serving-web-content/[Serving Web Content with Spring MVC]
+* https://spring.io/guides/gs/spring-boot/[Building an Application with Spring Boot]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/footer.adoc[]
-
