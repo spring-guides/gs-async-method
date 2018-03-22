@@ -9,7 +9,7 @@ projects: [spring-framework]
 :EnableAsync: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support
 :Future: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html
 :CompletableFuture: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
-:Executor: http://docs.spring.io/spring-framework/docs/current/spring-framework-reference/htmlsingle/#scheduling-task-executor
+:Executor: https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/integration.html#scheduling-task-executor
 :runner: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-command-line-runner
 :toc:
 :icons: font
