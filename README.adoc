@@ -87,7 +87,7 @@ include::complete/src/main/java/hello/Application.java[]
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/master/spring-boot-application.adoc[]
 
-The {EnableAsync}[`@EnableAsync`] annotation switches on Spring's ability to run `@Async` methods in a background thread pool. This class also customizes the used `Executor` by defining a new bean. Here the method is named `taskExecutor` since this is the {EnableAsyncJavadoc}[specific method name Spring will search for]. In our case, we want to limit the number of concurrent threads to 2 and limit the size of the queue to 500. There are {Executor}[many more things you can tune]. By default, a `SimpleAsyncTaskExecutor` is used.
+The {EnableAsync}[`@EnableAsync`] annotation switches on Spring's ability to run `@Async` methods in a background thread pool. This class also customizes the used `Executor` by defining a new bean. Here the method is named `taskExecutor` since this is the {EnableAsyncJavadoc}[specific method name Spring will search for]. In our case, we want to limit the number of concurrent threads to 2 and limit the size of the queue to 500. There are {Executor}[many more things you can tune]. If the user does not define an `Executor` bean Spring will create a `SimpleAsyncTaskExecutor` and use that.
 
 There is also a {runner}[`CommandLineRunner`] that injects the `GitHubLookupService` and calls that service 3 times to demonstrate the method is executed asynchronously.
 
