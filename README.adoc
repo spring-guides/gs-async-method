@@ -1,12 +1,12 @@
 :spring_version: current
 :spring_boot_version: 2.1.3.RELEASE
-:jackson: http://wiki.fasterxml.com/JacksonHome
-:SpringApplication: http://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
-:EnableAsync: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support
+:jackson: https://wiki.fasterxml.com/JacksonHome
+:SpringApplication: https://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
+:EnableAsync: https://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support
 :Future: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html
 :CompletableFuture: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
 :Executor: https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/integration.html#scheduling-task-executor
-:runner: http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-command-line-runner
+:runner: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-command-line-runner
 :toc:
 :icons: font
 :source-highlighter: prettify
@@ -110,9 +110,9 @@ method makes it possible to wait for the completion of all of the `CompletableFu
 2016-09-01 10:25:21.295  INFO 17893 --- [ GithubLookup-1] hello.GitHubLookupService                : Looking up PivotalSoftware
 2016-09-01 10:25:23.142  INFO 17893 --- [ GithubLookup-1] hello.GitHubLookupService                : Looking up Spring-Projects
 2016-09-01 10:25:24.281  INFO 17893 --- [           main] hello.AppRunner                          : Elapsed time: 2994
-2016-09-01 10:25:24.282  INFO 17893 --- [           main] hello.AppRunner                          : --> User [name=Pivotal Software, Inc., blog=http://pivotal.io]
+2016-09-01 10:25:24.282  INFO 17893 --- [           main] hello.AppRunner                          : --> User [name=Pivotal Software, Inc., blog=https://pivotal.io]
 2016-09-01 10:25:24.282  INFO 17893 --- [           main] hello.AppRunner                          : --> User [name=Cloud Foundry, blog=https://www.cloudfoundry.org/]
-2016-09-01 10:25:24.282  INFO 17893 --- [           main] hello.AppRunner                          : --> User [name=Spring, blog=http://spring.io/projects]
+2016-09-01 10:25:24.282  INFO 17893 --- [           main] hello.AppRunner                          : --> User [name=Spring, blog=https://spring.io/projects]
 ....
 
 Note that the first two calls happen in separate threads (`GithubLookup-2`, `GithubLookup-1`) and the third one is parked until one of the two threads became available. To compare how long this takes without the asynchronous feature, try commenting out the `@Async` annotation and run the service again. The total elapsed time should increase noticeably because each query takes at least a second. You can also tune the `Executor` to increase the `corePoolSize` attribute for instance.
