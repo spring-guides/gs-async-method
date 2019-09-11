@@ -1,4 +1,4 @@
-package hello;
+package com.example.asyncmethod;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
