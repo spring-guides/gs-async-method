@@ -1,4 +1,4 @@
-package hello;
+package com.example.asyncmethod;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,11 +10,11 @@ import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @EnableAsync
-public class Application {
+public class AsyncMethodApplication {
 
     public static void main(String[] args) {
         // close the application context to shut down the custom ExecutorService
-        SpringApplication.run(Application.class, args).close();
+        SpringApplication.run(AsyncMethodApplication.class, args).close();
     }
 
     @Bean
