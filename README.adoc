@@ -163,7 +163,7 @@ class:
 ====
 [source,java]
 ----
-include::complete/src/main/java/hello/AppRunner.java[]
+include::complete/src/main/java/com/example/asyncmethod/AppRunner.java[]
 ----
 ====
 
