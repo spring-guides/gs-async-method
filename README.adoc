@@ -75,7 +75,7 @@ provide a plain old Java object with fields, constructors, and accessors, as the
 example (from `src/main/java/com/example/asyncmethod/User.java`) shows:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/asyncmethod/User.java[]
 ----
@@ -94,7 +94,7 @@ Next, you need to create a service that queries GitHub to find user information.
 following listing (from `src/main/java/com/example/asyncmethod/GitHubLookupService.java`) shows how to do so:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/asyncmethod/GitHubLookupService.java[]
 ----
@@ -130,7 +130,7 @@ following listing (from
 
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/com/example/asyncmethod/AsyncMethodApplication.java[]
 ----
@@ -161,7 +161,7 @@ You also need a class to run the application. You can find that in
 class:
 
 ====
-[source,java]
+[source,java,tabsize=2]
 ----
 include::complete/src/main/java/hello/AppRunner.java[]
 ----
