@@ -143,8 +143,8 @@ include::complete/src/main/java/com/example/asyncmethod/AsyncMethodApplication.j
 ----
 ====
 
-NOTE: The Spring Initalizr created an `AsyncMethodApplication` class for you. You can find
-it in the zip file that you downloaded from the Spring Initalizr (in
+NOTE: The Spring Initializr created an `AsyncMethodApplication` class for you. You can find
+it in the zip file that you downloaded from the Spring Initializr (in
 `src/main/java/com/example/asyncmethod/AsyncMethodApplication.java`). You can either copy
 that class to your project and then modify it or copy the class from the preceding
 listing.
