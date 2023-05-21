@@ -135,7 +135,7 @@ a new bean. Here, the method is named `taskExecutor`, since this is the
 {EnableAsyncJavadoc}[specific method name for which Spring searches]. In our case, we want
 to limit the number of concurrent threads to two and limit the size of the queue to 500.
 There are {Executor}[many more things you can tune]. If you do not define an `Executor`
-bean, Spring creates a `SimpleAsyncTaskExecutor` and uses that.
+bean, Spring uses `ThreadPoolTaskExecutor`.
 
 There is also a {runner}[`CommandLineRunner`] that injects the `GitHubLookupService` and
 calls that service three times to demonstrate the method is executed asynchronously.
