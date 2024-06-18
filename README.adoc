@@ -1,5 +1,5 @@
 :spring_version: current
-:spring_boot_version: 3.1.0
+:spring_boot_version: 3.3.0
 :jackson: https://wiki.fasterxml.com/JacksonHome
 :SpringApplication: https://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
 :EnableAsync: https://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support
