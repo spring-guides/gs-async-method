@@ -21,7 +21,7 @@ asynchronous part, a feature often used when scaling services.
 You will build a lookup service that queries GitHub user information and retrieves data
 through GitHub's API. One approach to scaling services is to run expensive jobs in the
 background and wait for the results by using Java's
-{CompletableFuture}[`CompletableFuture`] interface. Java's `CompletableFuture` is an
+{CompletableFuture}[`CompletableFuture`] class. Java's `CompletableFuture` is an
 evolution from the regular `Future`. It makes it easy to pipeline multiple asynchronous
 operations and merge them into a single asynchronous computation.
 
@@ -184,7 +184,7 @@ also tune the `Executor` to increase the `corePoolSize` attribute for instance.
 
 Essentially, the longer the task takes and the more tasks are invoked simultaneously, the
 more benefit you see from making things asynchronous. The trade off is handling the
-`CompletableFuture` interface. It adds a layer of indirection, because you are no longer
+`CompletableFuture` class. It adds a layer of indirection, because you are no longer
 dealing directly with the results.
 
 == Summary
