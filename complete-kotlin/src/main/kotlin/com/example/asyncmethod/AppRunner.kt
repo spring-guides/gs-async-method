@@ -1,34 +1,33 @@
 package com.example.asyncmethod
 
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import java.util.concurrent.CompletableFuture
 
 @Component
-class AppRunner(private val gitHubLookupService: GitHubLookupService) : CommandLineRunner {
+class AppRunner(
+    private val gitHubLookupService: GitHubLookupService
+) : CommandLineRunner {
 
-	override fun run(vararg args: String) {
-		// Start the clock
-		val start = System.currentTimeMillis()
+    private val logger = LoggerFactory.getLogger(AppRunner::class.java)
 
-		// Kick of multiple, asynchronous lookups
-		val page1 = gitHubLookupService.findUser("PivotalSoftware")
-		val page2 = gitHubLookupService.findUser("CloudFoundry")
-		val page3 = gitHubLookupService.findUser("Spring-Projects")
+    override fun run(vararg args: String) {
+        // Start the clock
+        val start = System.currentTimeMillis()
 
-		// Wait until they are all done
-		CompletableFuture.allOf(page1, page2, page3).join()
+        // Kick off multiple, asynchronous lookups
+        val page1 = gitHubLookupService.findUser("PivotalSoftware")
+        val page2 = gitHubLookupService.findUser("CloudFoundry")
+        val page3 = gitHubLookupService.findUser("Spring-Projects")
 
-		// Print results, including elapsed time
-		logger.info("Elapsed time: " + (System.currentTimeMillis() - start))
-		logger.info("--> " + page1.get())
-		logger.info("--> " + page2.get())
-		logger.info("--> " + page3.get())
-	}
+        // Wait until they are all done
+        CompletableFuture.allOf(page1, page2, page3).join()
 
-	companion object {
-		private val logger: Logger = LoggerFactory.getLogger(AppRunner::class.java)
-	}
+        // Print results, including elapsed time
+        logger.info("Elapsed time: ${System.currentTimeMillis() - start}")
+        logger.info("--> ${page1.get()}")
+        logger.info("--> ${page2.get()}")
+        logger.info("--> ${page3.get()}")
+    }
 }

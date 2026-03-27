@@ -11,18 +11,16 @@ import java.util.concurrent.Executor
 @EnableAsync
 class AsyncMethodApplication {
 
-	@Bean
-	fun taskExecutor(): Executor {
-		val executor = ThreadPoolTaskExecutor()
-		executor.corePoolSize = 2
-		executor.maxPoolSize = 2
-        executor.queueCapacity = 500
-		executor.setThreadNamePrefix("GithubLookup-")
-		executor.initialize()
-		return executor
-	}
+    @Bean
+    fun taskExecutor(): Executor = ThreadPoolTaskExecutor().apply {
+        corePoolSize = 2
+        maxPoolSize = 2
+        queueCapacity = 500
+        setThreadNamePrefix("GithubLookup-")
+        initialize()
+    }
 }
 
 fun main(args: Array<String>) {
-	runApplication<AsyncMethodApplication>(*args).use { it.close() }
+    runApplication<AsyncMethodApplication>(*args).close()
 }
