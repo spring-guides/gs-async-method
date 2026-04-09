@@ -10,19 +10,18 @@ import java.util.concurrent.CompletableFuture
 @Service
 class GitHubLookupService {
 
-    private val logger = LoggerFactory.getLogger(GitHubLookupService::class.java)
-
+    private val logger = LoggerFactory.getLogger(javaClass)
     private val restClient = RestClient.create()
 
     @Async
     fun findUser(user: String): CompletableFuture<User> {
         logger.info("Looking up $user")
-        val result = restClient.get()
+        val results = restClient.get()
             .uri("https://api.github.com/users/$user")
             .retrieve()
             .body<User>()
         // Artificial delay of 1s for demonstration purposes
         Thread.sleep(1000L)
-        return CompletableFuture.completedFuture(result)
+        return CompletableFuture.completedFuture(results)
     }
 }

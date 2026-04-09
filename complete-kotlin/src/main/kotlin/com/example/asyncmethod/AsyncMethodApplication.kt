@@ -17,7 +17,6 @@ class AsyncMethodApplication {
         maxPoolSize = 2
         queueCapacity = 500
         setThreadNamePrefix("GithubLookup-")
-        initialize()
     }
 }
 

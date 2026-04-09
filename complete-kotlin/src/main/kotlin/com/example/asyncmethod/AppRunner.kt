@@ -10,7 +10,7 @@ class AppRunner(
     private val gitHubLookupService: GitHubLookupService
 ) : CommandLineRunner {
 
-    private val logger = LoggerFactory.getLogger(AppRunner::class.java)
+    private val logger = LoggerFactory.getLogger(javaClass)
 
     override fun run(vararg args: String) {
         // Start the clock

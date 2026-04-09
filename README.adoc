@@ -183,13 +183,13 @@ The following listing shows typical output from this sample application:
 
 ====
 ----
-2026-03-27T17:55:09.970+01:00  INFO 42074 --- [ GithubLookup-1] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
-2026-03-27T17:55:09.970+01:00  INFO 42074 --- [ GithubLookup-2] c.e.asyncmethod.GitHubLookupService      : Looking up CloudFoundry
-2026-03-27T17:55:11.294+01:00  INFO 42074 --- [ GithubLookup-1] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
-2026-03-27T17:55:12.479+01:00  INFO 42074 --- [           main] com.example.asyncmethod.AppRunner        : Elapsed time: 2510
-2026-03-27T17:55:12.480+01:00  INFO 42074 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Pivotal Software, Inc., blog=http://pivotal.io)
-2026-03-27T17:55:12.480+01:00  INFO 42074 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Cloud Foundry, blog=https://www.cloudfoundry.org/)
-2026-03-27T17:55:12.481+01:00  INFO 42074 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Spring, blog=https://spring.io/projects)
+2026-04-09T14:50:49.565+02:00  INFO 94338 --- [ GithubLookup-2] c.e.asyncmethod.GitHubLookupService      : Looking up CloudFoundry
+2026-04-09T14:50:49.565+02:00  INFO 94338 --- [ GithubLookup-1] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
+2026-04-09T14:50:50.876+02:00  INFO 94338 --- [ GithubLookup-2] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
+2026-04-09T14:50:52.067+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : Elapsed time: 2504
+2026-04-09T14:50:52.068+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Pivotal Software, Inc., blog=http://pivotal.io)
+2026-04-09T14:50:52.068+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Cloud Foundry, blog=https://www.cloudfoundry.org/)
+2026-04-09T14:50:52.069+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Spring, blog=https://spring.io/projects)
 ----
 ====
 
