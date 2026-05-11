@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClient
-import org.springframework.web.client.body
+import org.springframework.web.client.requiredBody
 import java.util.concurrent.CompletableFuture
 
 @Service
@@ -19,7 +19,7 @@ class GitHubLookupService {
         val results = restClient.get()
             .uri("https://api.github.com/users/$user")
             .retrieve()
-            .body<User>()
+            .requiredBody<User>()
         // Artificial delay of 1s for demonstration purposes
         Thread.sleep(1000L)
         return CompletableFuture.completedFuture(results)
