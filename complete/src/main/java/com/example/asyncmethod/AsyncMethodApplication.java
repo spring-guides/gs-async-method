@@ -27,6 +27,4 @@ public class AsyncMethodApplication {
 		executor.initialize();
 		return executor;
 	}
-
-
 }
