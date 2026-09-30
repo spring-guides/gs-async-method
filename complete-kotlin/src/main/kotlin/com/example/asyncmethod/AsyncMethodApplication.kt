@@ -21,5 +21,6 @@ class AsyncMethodApplication {
 }
 
 fun main(args: Array<String>) {
+    // close the application context to shut down the custom ExecutorService
     runApplication<AsyncMethodApplication>(*args).close()
 }

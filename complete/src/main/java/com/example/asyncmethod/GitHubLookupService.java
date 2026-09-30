@@ -15,16 +15,15 @@ public class GitHubLookupService {
 
 	private final RestClient restClient;
 
-	public GitHubLookupService() {
-		this.restClient = RestClient.create();
+	public GitHubLookupService(RestClient.Builder restClientBuilder) {
+		this.restClient = restClientBuilder.build();
 	}
 
 	@Async
 	public CompletableFuture<User> findUser(String user) throws InterruptedException {
 		logger.info("Looking up " + user);
-		String url = String.format("https://api.github.com/users/%s", user);
 		User results = restClient.get()
-				.uri(url)
+				.uri("https://api.github.com/users/{user}", user)
 				.retrieve()
 				.body(User.class);
 		// Artificial delay of 1s for demonstration purposes

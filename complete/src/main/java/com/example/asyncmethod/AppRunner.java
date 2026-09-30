@@ -23,13 +23,13 @@ public class AppRunner implements CommandLineRunner {
 		// Start the clock
 		long start = System.currentTimeMillis();
 
-		// Kick of multiple, asynchronous lookups
+		// Kick off multiple, asynchronous lookups
 		CompletableFuture<User> page1 = gitHubLookupService.findUser("PivotalSoftware");
 		CompletableFuture<User> page2 = gitHubLookupService.findUser("CloudFoundry");
 		CompletableFuture<User> page3 = gitHubLookupService.findUser("Spring-Projects");
 
 		// Wait until they are all done
-		CompletableFuture.allOf(page1,page2,page3).join();
+		CompletableFuture.allOf(page1, page2, page3).join();
 
 		// Print results, including elapsed time
 		logger.info("Elapsed time: " + (System.currentTimeMillis() - start));

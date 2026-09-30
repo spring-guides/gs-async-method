@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class AsyncMethodApplication
 
 fun main(args: Array<String>) {
-	runApplication<AsyncMethodApplication>(*args)
+    runApplication<AsyncMethodApplication>(*args)
 }

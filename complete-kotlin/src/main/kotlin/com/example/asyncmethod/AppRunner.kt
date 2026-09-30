@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component
 import java.util.concurrent.CompletableFuture
 
 @Component
-class AppRunner(
-    private val gitHubLookupService: GitHubLookupService
-) : CommandLineRunner {
+class AppRunner(private val gitHubLookupService: GitHubLookupService) : CommandLineRunner {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 

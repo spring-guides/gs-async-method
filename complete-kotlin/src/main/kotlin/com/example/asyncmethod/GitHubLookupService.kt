@@ -8,16 +8,17 @@ import org.springframework.web.client.requiredBody
 import java.util.concurrent.CompletableFuture
 
 @Service
-class GitHubLookupService {
+class GitHubLookupService(restClientBuilder: RestClient.Builder) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
-    private val restClient = RestClient.create()
+
+    private val restClient = restClientBuilder.build()
 
     @Async
     fun findUser(user: String): CompletableFuture<User> {
         logger.info("Looking up $user")
         val results = restClient.get()
-            .uri("https://api.github.com/users/$user")
+            .uri("https://api.github.com/users/{user}", user)
             .retrieve()
             .requiredBody<User>()
         // Artificial delay of 1s for demonstration purposes

@@ -1,10 +1,8 @@
 :spring_version: current
-:spring_boot_version: 3.3.0
 :jackson: https://wiki.fasterxml.com/JacksonHome
-:SpringApplication: https://docs.spring.io/spring-boot/docs/{spring_boot_version}/api/org/springframework/boot/SpringApplication.html
 :EnableAsync: https://docs.spring.io/spring/docs/current/spring-framework-reference/html/scheduling.html#scheduling-annotation-support
-:Future: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html
-:CompletableFuture: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
+:Future: https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/Future.html
+:CompletableFuture: https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html
 :Executor: https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/integration.html#scheduling-task-executor
 :runner: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-command-line-runner
 :toc:
@@ -20,7 +18,7 @@ asynchronous part, a feature often used when scaling services.
 
 You will build a lookup service that queries GitHub user information and retrieves data
 through GitHub's API. One approach to scaling services is to run expensive jobs in the
-background and wait for the results by using {CompletableFuture}[`CompletableFuture`] class.
+background and wait for the results by using the {CompletableFuture}[`CompletableFuture`] class.
 The `CompletableFuture` is an evolution from the regular `Future`. It makes it easy to pipeline multiple asynchronous
 operations and merge them into a single asynchronous computation.
 
@@ -33,14 +31,14 @@ include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/
 [[scratch]]
 == Starting with Spring Initializr
 
-You can use this https://start.spring.io/#!type=gradle-project&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=async-method&packageName=com.example.asyncmethod&dependencies=web[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
+You can use this https://start.spring.io/#!type=gradle-project&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=async-method&packageName=com.example.asyncmethod&dependencies=web,spring-restclient[pre-initialized project] and click Generate to download a ZIP file. This project is configured to fit the examples in this tutorial.
 
 To manually initialize the project:
 
 . Navigate to https://start.spring.io.
 This service pulls in all the dependencies you need for an application and does most of the setup for you.
 . Choose either Gradle or Maven and the language you want to use.
-. Click *Dependencies* and select *Spring Web*.
+. Click *Dependencies* and select *Spring Web* and *HTTP Client*.
 . Click *Generate*.
 . Download the resulting ZIP file, which is an archive of a web application that is configured with your choices.
 
@@ -54,10 +52,9 @@ NOTE: You can also fork the project from GitHub and open it in your IDE or other
 Before you can create a GitHub lookup service, you need to define a representation for the
 data you will retrieve through GitHub's API.
 
-To model the user representation, create a resource representation class. To do so,
-provide a simple class with fields, constructors, and accessors, as the following example shows:
+To model the user representation, create an immutable resource representation class (a
+Java record or a Kotlin data class), as the following example shows:
 
-====
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
 ----
@@ -68,21 +65,19 @@ include::complete/src/main/java/com/example/asyncmethod/User.java[]
 ----
 include::complete-kotlin/src/main/kotlin/com/example/asyncmethod/User.kt[]
 ----
-====
+
 Spring uses the {jackson}[Jackson JSON] library to convert GitHub's JSON response into a
-`User` object. The `@JsonIgnoreProperties` annotation tells Spring to ignore any
+`User` object. The `@JsonIgnoreProperties` annotation tells Jackson to ignore any
 attributes not listed in the class. This makes it easy to make REST calls and produce
 domain objects.
 
 In this guide, we grab only the `name` and the `blog` URL for demonstration purposes.
 
-
 == Create a GitHub Lookup Service
 
 Next, you need to create a service that queries GitHub to find user information. The
-following listing (from shows how to do so:
+following listing shows how to do so:
 
-====
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
 ----
@@ -93,12 +88,12 @@ include::complete/src/main/java/com/example/asyncmethod/GitHubLookupService.java
 ----
 include::complete-kotlin/src/main/kotlin/com/example/asyncmethod/GitHubLookupService.kt[]
 ----
-====
 
-The `GitHubLookupService` class uses Spring's `RestTemplate` to invoke a remote REST point
+The `GitHubLookupService` class uses Spring's `RestClient` to invoke a remote REST point
 (api.github.com/users/) and then convert the answer into a `User` object. Spring Boot
-automatically provides a `RestTemplateBuilder` that customizes the defaults with any
-autoconfiguration bits (that is, `MessageConverter`).
+automatically provides a `RestClient.Builder` that customizes the defaults with any
+auto-configuration bits (that is, `HttpMessageConverter`), provided that the
+`spring-boot-starter-restclient` dependency is on the classpath.
 
 The class is marked with the `@Service` annotation, making it a candidate for Spring's
 component scanning to detect and add to the application context.
@@ -107,7 +102,7 @@ The `findUser` method is flagged with Spring's `@Async` annotation, indicating t
 should run on a separate thread. The method's return type is
 {CompletableFuture}[`CompletableFuture<User>`] instead of `User`, a requirement for any
 asynchronous service. This code uses the `completedFuture` method to return a
-`CompletableFuture` instance that is already completed with result of the GitHub query.
+`CompletableFuture` instance that is already completed with the result of the GitHub query.
 
 NOTE: Creating a local instance of the `GitHubLookupService` class does NOT allow the
 `findUser` method to run asynchronously. It must be created inside a `@Configuration`
@@ -122,8 +117,6 @@ To run a sample, you can create an executable jar. Spring's `@Async` annotation 
 web applications, but you need not set up a web container to see its benefits. The
 following listing shows how to do so:
 
-
-====
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
 ----
@@ -134,7 +127,6 @@ include::complete/src/main/java/com/example/asyncmethod/AsyncMethodApplication.j
 ----
 include::complete-kotlin/src/main/kotlin/com/example/asyncmethod/AsyncMethodApplication.kt[]
 ----
-====
 
 NOTE: The Spring Initializr created an `AsyncMethodApplication` class for you. You can find
 it in the zip file that you downloaded from the Spring Initializr. You can either copy
@@ -154,10 +146,8 @@ bean, Spring uses `ThreadPoolTaskExecutor`.
 There is also a {runner}[`CommandLineRunner`] that injects the `GitHubLookupService` and
 calls that service three times to demonstrate the method is executed asynchronously.
 
-
 You also need a class to run the application as the following listing shows:
 
-====
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
 ----
@@ -168,7 +158,6 @@ include::complete/src/main/java/com/example/asyncmethod/AppRunner.java[]
 ----
 include::complete-kotlin/src/main/kotlin/com/example/asyncmethod/AppRunner.kt[]
 ----
-====
 
 include::https://raw.githubusercontent.com/spring-guides/getting-started-macros/main/build_an_executable_jar_subhead.adoc[]
 
@@ -179,7 +168,8 @@ The application shows logging output, showing each query to GitHub. With the hel
 the `join` method, it is possible to wait for the completion of all of the
 `CompletableFuture` objects.
 
-The following listing shows typical output from this sample application:
+The following listing shows typical output (using the Java `User` record) from this
+sample application:
 
 ====
 ----
@@ -187,9 +177,9 @@ The following listing shows typical output from this sample application:
 2026-04-09T14:50:49.565+02:00  INFO 94338 --- [ GithubLookup-1] c.e.asyncmethod.GitHubLookupService      : Looking up PivotalSoftware
 2026-04-09T14:50:50.876+02:00  INFO 94338 --- [ GithubLookup-2] c.e.asyncmethod.GitHubLookupService      : Looking up Spring-Projects
 2026-04-09T14:50:52.067+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : Elapsed time: 2504
-2026-04-09T14:50:52.068+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Pivotal Software, Inc., blog=http://pivotal.io)
-2026-04-09T14:50:52.068+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Cloud Foundry, blog=https://www.cloudfoundry.org/)
-2026-04-09T14:50:52.069+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User(name=Spring, blog=https://spring.io/projects)
+2026-04-09T14:50:52.068+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User[name=Pivotal Software, Inc., blog=http://pivotal.io]
+2026-04-09T14:50:52.068+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User[name=Cloud Foundry, blog=https://www.cloudfoundry.org/]
+2026-04-09T14:50:52.069+02:00  INFO 94338 --- [           main] com.example.asyncmethod.AppRunner        : --> User[name=Spring, blog=https://spring.io/projects]
 ----
 ====
 
