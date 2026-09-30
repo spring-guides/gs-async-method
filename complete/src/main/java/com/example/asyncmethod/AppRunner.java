@@ -38,5 +38,4 @@ public class AppRunner implements CommandLineRunner {
 		logger.info("--> " + page3.get());
 
 	}
-
 }
